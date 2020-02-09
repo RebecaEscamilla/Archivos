@@ -1,47 +1,48 @@
-from sys import exit
+from sys import exit #importamos las clases
 import shutil,os
-class Archivo:
+class Archivo: #creamos una lcase archivo
     def __init__(self,nombre):
         try:
-            self.f=open(nombre,'r')
+            self.f=open(nombre,'r') #hace lectura del archivo
             self.nombre=nombre
-        except:
+        except: #si no encuentra el archivo mandara un mensaje de error
             print("no se puede abrir el archivo",nombre)
-            exit()
+            exit() #termina el programa si no encuentra el archivo
     def muestra(self):
         i=1
         for linea in self.f:
+        #formas en las que se puede imprimir el contenido del archivo que se lee
             #print("{:3}:{}".format(i,linea))
             print("{:3}:{}".format(i,linea),end="")
-            i +=1
             #print("{:x}:{}".format(i,linea))
             #print("{:o}:{}".format(i,linea))
             #print("{:b}:{}".format(i,linea))
+            i +=1 
         self.f.seek(0)
-    def cuentaVocales(self):
+    def cuentaVocales(self): #clase para leer vocales
         def vocales(s):
             contador=0
             for i in range(len(s)):
-                if s[i] in set("aeiouáéíóú"):
-                    contador +=1
+                if s[i] in set("aeiouáéíóú"): #se busca entre las vocales
+                    contador +=1 #si se encuentra incrementa el contador en 1
             return contador
         contador=0
         for linea in self.f:
             contador += vocales(linea)
         self.f.seek(0)
-        return contador
-    def consonantes(self):
+        return contador #manda el numero de vocales
+    def consonantes(self): #clase para contar consonantes del archivo
         def cuentaCons(s):
             contador=0
             for i in range(len(s)):
-                if s[i] in set("BCDFGHJKLMNÑPQRSTVWXYZbcdfghjklmnñpqrstvwxyz"):
-                    contador +=1
+                if s[i] in set("BCDFGHJKLMNÑPQRSTVWXYZbcdfghjklmnñpqrstvwxyz"): #buca en rango de consonantes
+                    contador +=1 #si encuentra una consonante aumeta el contado
             return contador
         contador=0
         for linea in self.f:
             contador += cuentaCons(linea)
         self.f.seek(0)
-        return contador
+        return contador #manda el contenido de contador
     def signos(self):
         def cuentasig(s):
             contador=0
