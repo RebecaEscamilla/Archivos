@@ -1,6 +1,6 @@
 from sys import exit #importamos las clases
 import shutil,os
-class Archivo: #creamos una lcase archivo
+class Archivo: #creamos una clase archivo
     def __init__(self,nombre):
         try:
             self.f=open(nombre,'r') #hace lectura del archivo
