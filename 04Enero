@@ -18,7 +18,7 @@ class Archivo: #creamos una lcase archivo
             #print("{:o}:{}".format(i,linea))
             #print("{:b}:{}".format(i,linea))
             i +=1 
-        self.f.seek(0)
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
     def cuentaVocales(self): #clase para leer vocales
         def vocales(s):
             contador=0
@@ -29,7 +29,7 @@ class Archivo: #creamos una lcase archivo
         contador=0
         for linea in self.f:
             contador += vocales(linea)
-        self.f.seek(0)
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
         return contador #manda el numero de vocales
     def consonantes(self): #clase para contar consonantes del archivo
         def cuentaCons(s):
@@ -41,146 +41,147 @@ class Archivo: #creamos una lcase archivo
         contador=0
         for linea in self.f:
             contador += cuentaCons(linea)
-        self.f.seek(0)
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
         return contador #manda el contenido de contador
-    def signos(self):
+    def signos(self): #clase para contar los signos en el archivo
         def cuentasig(s):
             contador=0
             for i in range(len(s)):
-                if s[i] in set(",.;:_-()[]{}¨´'¿?!¡"):
-                    contador +=1
+                if s[i] in set(",.;:_-()[]{}¨´'¿?!¡"): #buca en rango de signos
+                    contador +=1 #si encuentra un signo aumeta el contado
             return contador
         contador=0
         for linea in self.f:
             contador += cuentasig(linea)
-        self.f.seek(0)
-        return contador
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
+        return contador #manda el contenido de contador
     def espacios(self):
         def cuentaesp(s):
             contador=0
             for i in range(len(s)):
-                if s[i] in set(" "):
-                    contador +=1
+                if s[i] in set(" "): #buca en rango de espacios
+                    contador +=1 #si encuentra un espacio aumeta el contado
             return contador
         contador=0
         for linea in self.f:
             contador += cuentaesp(linea)
-        self.f.seek(0)
-        return contador
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
+        return contador #manda el contenido de contador
     def lineas(self):
         def cuentalin(s):
             contador=0
             for i in range(len(s)):
-                if s[i] in set("\n"):
-                    contador +=2
+                if s[i] in set("\n"): #buca en rango de salto de lineas
+                    contador +=2 #si encuentra un salto de linea aumeta el contado
             return contador
         contador=0
         for linea in self.f:
             contador += cuentalin(linea)
-        self.f.seek(0)
-        return contador
-    def mayusculas(self):
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
+        return contador #manda el contenido de contador
+    def mayusculas(self): #clase para contar mayusculas
         def cuentaMayusculas(cadena):
             conta=0
             for i in cadena:
-                if i !=i.lower():
-                    conta+=1
+                if i !=i.lower(): #pregunta si es diferente a una minuscula
+                    conta+=1 #si encuentra una letra mayuscula aumenta el contador
             return conta
         conta=0
         for linea in self.f:
             conta += cuentaMayusculas(linea)
-        self.f.seek(0)
-        return conta
-    def minusculas(self):
+        self.f.seek(0) #seek () establece la posición actual del archivo en el desplazamiento
+        return conta #manda el contenido de contador
+    def minusculas(self): #clase para contar minusculas
         def cuentaMinusculas(s):
             conta=0
             for i in range(len(s)):
-                if s[i] in set("abcdefghijklmnñopqrstuvwxyz"):
-                    conta +=1
+                if s[i] in set("abcdefghijklmnñopqrstuvwxyzáéíóú"): #busca en las letras minusculas
+                    conta +=1 #si encuentra una minuscula aumenta el contador
             return conta
         conta=0
         for linea in self.f:
-            conta += cuentaMinusculas(linea)
-        self.f.seek(0)
-        return conta
-    def Conmayusculas(self):
+            conta += cuentaMinusculas(linea) 
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
+        return conta #manda el contenido de contador
+    def Conmayusculas(self): #clase para convertir el texto en mayusculas
         i=1
         print("Texto en mayusculas: ")
         for linea in self.f:
-            print(linea.upper())
+            print(linea.upper()) #imprime en mayusculas
             i +=1
-        self.f.seek(0)
-    def Conminusculas(self):
+        self.f.seek(0) #seek () establece la posición actual del archivo en el desplazamiento
+    def Conminusculas(self): #convierte el archivo en minusculas
         i=1
         print("Texto en minusculas: ")
         for linea in self.f:
-            print(linea.lower())
+            print(linea.lower()) #imprime el archivo en minusculas
             i +=1
-        self.f.seek(0)
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
     def espacio(self):
         def cuentaesp(s):
             contador=0
             for i in range(len(s)):
-                if s[i] in set(' '):
-                    contador +=1
+                if s[i] in set(' '): #compara si es un espacio
+                    contador +=1 #aumenta el contador
             return contador
         contador=0
         for linea in self.f:
             contador += cuentaesp(linea)
-        self.f.seek(0)
-        return contador
-    def cuentapalabras(self):
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
+        return contador #manda el contenido de contador
+    def cuentapalabras(self): #clase para contar palabras
         def pal(s):
             contador=0
             for i in range(len(s)):
-                if s[i] in set(",.;:\n-_' '"):
-                    contador+=1
+                if s[i] in set(",.;:\n-_' '"): #busca el final de una palabra que puede ser un espacio,salto de linea,',' etc.
+                    contador+=1 #aumenta el contador
             return contador
         contador=0
         for linea in self.f:
             contador += pal(linea)
-        self.f.seek(0)
-        return contador
-    def hexadecimal(self):
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
+        return contador #manda el contenido de contador
+    def hexadecimal(self): #muestra en hexadecimal el archivo
         for linea in self.f:
             for letra in linea:   
                 nuevaletra = hex(ord(letra))
                 nuevaletra = nuevaletra[2::]
-                print(nuevaletra,end="")
+                print(nuevaletra,end="") #imprime en hexadecimal
             print("\n")
-        self.f.seek(0)
+        self.f.seek(0) #significa el posicionamiento absoluto del archivo
+#inicia nuestra clase principal
 #main
 nomb=input("nombre del archivo: ")
-archivo=Archivo(nomb)
-archivo.muestra()
-a = archivo.cuentaVocales()
-print("\n numero de vocales: ",a)
-a = archivo.consonantes()
-print("\n numero de consonantes: ",a)
-a = archivo.signos()
-print("\n numero de signos de puntuacion : ",a)
-a = archivo.lineas()
-print("\n numero de lineas : ",a)
-a = archivo.mayusculas()
-print("\n numero de mayusculas : ",a)                
-a = archivo.minusculas()
-print("\n numero de minusculas : ",a)
-archivo.Conmayusculas()
-archivo.Conminusculas()
-a = archivo.espacio()
-print("\n numero de espacios : ",a)
-a = archivo.cuentapalabras()
-print("\n numero de palabras : ",a)
-print("Muestra en hexadecimal ")
-archivo.hexadecimal()
+archivo=Archivo(nomb) #se le pide el nombre del archivo al usuario
+archivo.muestra() #llama a la clase muestra
+a = archivo.cuentaVocales() #llama a la clase para contar vocales
+print("\n numero de vocales: ",a) #imprime lo que nos regresa la clase
+a = archivo.consonantes() #llama a la clase para contar consonantes
+print("\n numero de consonantes: ",a) #imprime lo que nos regresa la clase
+a = archivo.signos() #llama a la clase para contar signos
+print("\n numero de signos de puntuacion : ",a) #imprime lo que nos regresa la clase
+a = archivo.lineas() #llama a la clase para contar lineas
+print("\n numero de lineas : ",a) #imprime lo que nos regresa la clase
+a = archivo.mayusculas() #llama a la clase para contar mayusculas
+print("\n numero de mayusculas : ",a)  #imprime lo que nos regresa la clase               
+a = archivo.minusculas() #llama a la clase para contar minusculas
+print("\n numero de minusculas : ",a) #imprime lo que nos regresa la clase
+archivo.Conmayusculas() #llama a la clase para conventir en mayudaculas
+archivo.Conminusculas() #llama a la clase para conventir en minusculas
+a = archivo.espacio() #llama a la clase para contar los espacios
+print("\n numero de espacios : ",a) #imprime lo que nos regresa la clase
+a = archivo.cuentapalabras() #llama a la clase para contar las palabras
+print("\n numero de palabras : ",a) #imprime lo que nos regresa la clase
+print("Muestra en hexadecimal ") 
+archivo.hexadecimal() #imprime lo que nos regresa la clase
 #copia archivo
 ruta = os.getcwd() + os.sep
-origen = ruta + 'hola.txt'
-destino = ruta + 'prueba.txt'
+origen = ruta + 'hola.txt' #archivo original
+destino = ruta + 'prueba.txt' #archivo al que quiere copiar 
 if os.path.exists(origen):
     with open(origen, 'rb') as forigen:
         with open(destino, 'wb') as fdestino:
             shutil.copyfileobj(forigen, fdestino)
-            print("Archivo copiado")
+            print("Archivo copiado") #mensaje de confirmacion 
 
 
