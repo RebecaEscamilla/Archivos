@@ -1,0 +1,185 @@
+from sys import exit
+import shutil,os
+class Archivo:
+    def __init__(self,nombre):
+        try:
+            self.f=open(nombre,'r')
+            self.nombre=nombre
+        except:
+            print("no se puede abrir el archivo",nombre)
+            exit()
+    def muestra(self):
+        i=1
+        for linea in self.f:
+            #print("{:3}:{}".format(i,linea))
+            print("{:3}:{}".format(i,linea),end="")
+            i +=1
+            #print("{:x}:{}".format(i,linea))
+            #print("{:o}:{}".format(i,linea))
+            #print("{:b}:{}".format(i,linea))
+        self.f.seek(0)
+    def cuentaVocales(self):
+        def vocales(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set("aeiouáéíóú"):
+                    contador +=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador += vocales(linea)
+        self.f.seek(0)
+        return contador
+    def consonantes(self):
+        def cuentaCons(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set("BCDFGHJKLMNÑPQRSTVWXYZbcdfghjklmnñpqrstvwxyz"):
+                    contador +=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador += cuentaCons(linea)
+        self.f.seek(0)
+        return contador
+    def signos(self):
+        def cuentasig(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set(",.;:_-()[]{}¨´'¿?!¡"):
+                    contador +=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador += cuentasig(linea)
+        self.f.seek(0)
+        return contador
+    def espacios(self):
+        def cuentaesp(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set(" "):
+                    contador +=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador += cuentaesp(linea)
+        self.f.seek(0)
+        return contador
+    def lineas(self):
+        def cuentalin(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set("\n"):
+                    contador +=2
+            return contador
+        contador=0
+        for linea in self.f:
+            contador += cuentalin(linea)
+        self.f.seek(0)
+        return contador
+    def mayusculas(self):
+        def cuentaMayusculas(cadena):
+            conta=0
+            for i in cadena:
+                if i !=i.lower():
+                    conta+=1
+            return conta
+        conta=0
+        for linea in self.f:
+            conta += cuentaMayusculas(linea)
+        self.f.seek(0)
+        return conta
+    def minusculas(self):
+        def cuentaMinusculas(s):
+            conta=0
+            for i in range(len(s)):
+                if s[i] in set("abcdefghijklmnñopqrstuvwxyz"):
+                    conta +=1
+            return conta
+        conta=0
+        for linea in self.f:
+            conta += cuentaMinusculas(linea)
+        self.f.seek(0)
+        return conta
+    def Conmayusculas(self):
+        i=1
+        print("Texto en mayusculas: ")
+        for linea in self.f:
+            print(linea.upper())
+            i +=1
+        self.f.seek(0)
+    def Conminusculas(self):
+        i=1
+        print("Texto en minusculas: ")
+        for linea in self.f:
+            print(linea.lower())
+            i +=1
+        self.f.seek(0)
+    def espacio(self):
+        def cuentaesp(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set(' '):
+                    contador +=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador += cuentaesp(linea)
+        self.f.seek(0)
+        return contador
+    def cuentapalabras(self):
+        def pal(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set(",.;:\n-_' '"):
+                    contador+=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador += pal(linea)
+        self.f.seek(0)
+        return contador
+    def hexadecimal(self):
+        for linea in self.f:
+            for letra in linea:   
+                nuevaletra = hex(ord(letra))
+                nuevaletra = nuevaletra[2::]
+                print(nuevaletra,end="")
+            print("\n")
+        self.f.seek(0)
+#main
+nomb=input("nombre del archivo: ")
+archivo=Archivo(nomb)
+archivo.muestra()
+a = archivo.cuentaVocales()
+print("\n numero de vocales: ",a)
+a = archivo.consonantes()
+print("\n numero de consonantes: ",a)
+a = archivo.signos()
+print("\n numero de signos de puntuacion : ",a)
+a = archivo.lineas()
+print("\n numero de lineas : ",a)
+a = archivo.mayusculas()
+print("\n numero de mayusculas : ",a)                
+a = archivo.minusculas()
+print("\n numero de minusculas : ",a)
+archivo.Conmayusculas()
+archivo.Conminusculas()
+a = archivo.espacio()
+print("\n numero de espacios : ",a)
+a = archivo.cuentapalabras()
+print("\n numero de palabras : ",a)
+print("Muestra en hexadecimal ")
+archivo.hexadecimal()
+#copia archivo
+ruta = os.getcwd() + os.sep
+origen = ruta + 'hola.txt'
+destino = ruta + 'prueba.txt'
+if os.path.exists(origen):
+    with open(origen, 'rb') as forigen:
+        with open(destino, 'wb') as fdestino:
+            shutil.copyfileobj(forigen, fdestino)
+            print("Archivo copiado")
+
+
